@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>☕ Terry 專家咖啡館</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --text: #3a342c;
+    --muted: #6b6358;
+    --card: #fffdf9;
+    --border: #e8e1d4;
+    --accent: #6b4226;
+    --accent-soft: #a67c52;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1612;
+      --text: #f0ebe0;
+      --muted: #a8a094;
+      --card: #25201a;
+      --border: #3a342c;
+      --accent: #d8a657;
+      --accent-soft: #b88a5a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang HK", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    padding: 2.5rem 1.25rem;
+    transition: background .3s, color .3s;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header h1 { font-size: 1.85rem; font-weight: 600; color: var(--accent); margin-bottom: .4rem; letter-spacing: .5px; }
+  header p { color: var(--muted); font-size: .95rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1.6rem;
+    margin-bottom: 1.4rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .card h2 { font-size: 1.15rem; color: var(--accent); margin-bottom: .6rem; font-weight: 600; }
+  .card p { color: var(--muted); font-size: .92rem; margin-bottom: 1rem; }
+  .prompt-box {
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: "SF Mono", Consolas, "Courier New", monospace;
+    font-size: .88rem;
+    line-height: 1.7;
+    color: var(--text);
+    user-select: all;
+    -webkit-user-select: all;
+  }
+  .actions { margin-top: 1rem; display: flex; gap: .6rem; flex-wrap: wrap; }
+  button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: .55rem 1.2rem;
+    border-radius: 8px;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    font-family: inherit;
+  }
+  button:hover { background: var(--accent-soft); }
+  button:active { transform: scale(.97); }
+  button.copied { background: #2d8659; }
+  .nav-back {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .nav-back a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: .9rem;
+    border-bottom: 1px dashed var(--accent);
+    padding-bottom: 2px;
+  }
+  .nav-back a:hover { color: var(--accent-soft); }
+  footer { text-align: center; margin-top: 2.5rem; color: var(--muted); font-size: .8rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>☕ Terry 專家咖啡館</h1>
+    <p>揀一杯你今日想飲嘅咖啡，複製下面嘅 Prompt，貼去你慣用嘅 AI 傾偈</p>
+  </header>
+
+  <!-- 卡片 1: 電影解讀 -->
+  <div class="card">
+    <h2>🎬 電影深度解讀館</h2>
+    <p>想搵人陪你睇完一齣戲，深度拆解導演嘅佈局同角色嘅心理？</p>
+    <div class="prompt-box" id="prompt1">我啱啱睇完一齣電影，想搵你做一次有深度的電影解讀。
+
+請你扮演一位資深影評人，依家呢部電影喺全球同亞洲嘅票房同口碑數據係點？呢部戲入面導演用咗啲乜嘢象徵手法同隱藏細節？主角嘅心理轉變點同核心衝突係乜？同類題材入面，有冇三套電影係我一定要連住一齊睇嘅？最後，呢部戲想帶俾觀眾嘅終極反思係乜？請用粵語（香港用語）回答。</div>
+    <div class="actions">
+      <button onclick="copyPrompt('prompt1', this)">📋 複製 Prompt</button>
+    </div>
+  </div>
+
+  <!-- 卡片 2: 旅行策劃 -->
+  <div class="card">
+    <h2>🗺️ 深度旅行策劃館</h2>
+    <p>準備去旅行？想搵人幫你度一條有故事、有深度嘅路線？</p>
+    <div class="prompt-box" id="prompt2">我要去旅行啦，想你扮演一個經驗豐富嘅本地深度導遊，幫我規劃行程。
+
+我會喺下一條訊息入面俾你目的地、出發日期、行程日數同埋我嘅興趣（自然／人文／美食／建築等等）。
+
+請你幫我：
+1. 根據呢個目的地嘅最新趨勢，設計一條可以避開人潮嘅深度路線
+2. 揀幾個有故事嘅特色住宿或秘境景點
+3. 推薦三道當地人才知嘅隱世美食
+4. 提一提我喺文化禮儀上要特別注意嘅地方
+請用粵語（香港用語）回答，格式清晰易讀。</div>
+    <div class="actions">
+      <button onclick="copyPrompt('prompt2', this)">📋 複製 Prompt</button>
+    </div>
+  </div>
+
+  <!-- 卡片 3: 投資分析 -->
+  <div class="card">
+    <h2>💰 投資趨勢分析館</h2>
+    <p>想了解最新市場趨勢？等你嘅 AI 同你傾吓點部署。</p>
+    <div class="prompt-box" id="prompt3">我想你扮演一個有國際視野同本地經驗嘅投資策略師，幫我做一次宏觀市場分析。
+
+請你依家根據最新嘅經濟數據，幫我拆解：
+1. 2026 年全球同亞洲主要經濟體嘅增長重心喺邊度？邊啲產業有結構性增長紅利？
+2. 美股、港股、A股、加密資產、黃金喺未來12個月嘅劇本係點？
+3. 普通投資者用嚟做核心倉嘅 ETF 同股，有冇五個值得留意嘅方向？
+4. 喺不明朗嘅宏觀環境入面，有咩避坑嘅風控原則？
+
+請用粵語（香港用語）回答，盡量提供有數據支持嘅觀點，避免無根據嘅推介。</div>
+    <div class="actions">
+      <button onclick="copyPrompt('prompt3', this)">📋 複製 Prompt</button>
+    </div>
+  </div>
+
+  <!-- 卡片 4: 飲食推薦 -->
+  <div class="card">
+    <h2>🍜 餐廳及食譜研發館</h2>
+    <p>想食好嘢又唔知去邊好？等你嘅 AI 幫你揀。</p>
+    <div class="prompt-box" id="prompt4">我而家好肚餓，想你扮演一個識飲識食嘅美食顧問，幫我解決兩件事：
+
+【任務 A · 餐廳推薦】
+我會喺下一條訊息入面俾你地點、價位、想食嘅菜式同埋埋單預算。
+請你推薦三間餐廳，要附地點、招牌菜、人均消費同點解推薦嘅原因。
+
+【任務 B · 食譜研發】
+用我雪櫃入面可能有嘅食材，設計一道喺 20 分鐘內搞掂、適合香港人口味嘅家常菜，要寫埋步驟同小貼士。
+
+請用粵語（香港用語）回答，語氣輕鬆啲。</div>
+    <div class="actions">
+      <button onclick="copyPrompt('prompt4', this)">📋 複製 Prompt</button>
+    </div>
+  </div>
+
+  <!-- 卡片 5: 求職升學 -->
+  <div class="card">
+    <h2>💼 求職升學諮詢館</h2>
+    <p>想轉工、升學、考試？等你嘅 AI 同你諗吓方向。</p>
+    <div class="prompt-box" id="prompt5">我想你扮演一位熟悉香港同國際市場嘅職涯顧問同升學策劃師，幫我做一個清晰嘅決策分析。
+
+我會喺下一條訊息入面俾你：
+- 我嘅背景（學歷 / 工作年資 / 行業）
+- 我嘅目標（轉工 / 跳槽 / 升學 / 考牌）
+- 我最擔心嘅嘢（年齡 / 市場 / 家庭 / 經濟）
+
+請你幫我：
+1. 拆解香港同海外嘅最新機會同挑戰
+2. 喺2026年，有冇三個被睇好嘅新興行業適合我考慮？
+3. 設計一個為期90日嘅行動清單
+4. 提一提我喺CV、面試、Networking 上要點部署
+
+請用粵語（香港用語）回答，務實啲，唔好畀啲無謂嘅正能量。</div>
+    <div class="actions">
+      <button onclick="copyPrompt('prompt5', this)">📋 複製 Prompt</button>
+    </div>
+  </div>
+
+  <!-- 卡片 6: 潮流社群 -->
+  <div class="card">
+    <h2>📱 潮流社群情報館</h2>
+    <p>想知道最近興咩？等你嘅 AI 同你 update 吓。</p>
+    <div class="prompt-box" id="prompt6">我想你扮演一個熟悉全球潮流文化嘅年輕社群編輯，幫我 update 一下最新嘅文化地圖。
+
+請你依家根據最新嘅網絡趨勢，幫我整理：
+1. 喺 Threads、Instagram、YouTube、抖音、小紅書、Bluesky 呢六個平台入面，依家邊三個潮流關鍵字同文化現象係最值得留意嘅？
+2. 邊三位喺2026年值得 follow 嘅獨立創作者？佢哋點解重要？
+3. 針對我嘅興趣（社群文化 / 短片創作 / 視覺設計），有冇三個可以即刻行動嘅實驗？
+
+【順便推薦】
+我依家想搵高質素嘅 YouTube 影片放鬆吓，請推薦三條2025–2026年嘅代表性影片，並提供可靠連結。
+
+請用粵語（香港用語）回答，語氣貼近後生仔。</div>
+    <div class="actions">
+      <button onclick="copyPrompt('prompt6', this)">📋 複製 Prompt</button>
+    </div>
+  </div>
+
+  <div class="nav-back">
+    <a href="https://terry20250224.github.io/my-share/custom-hub.html">← 返回 Terry's Hub</a>
+  </div>
+
+  <footer>© Terry 專家咖啡館 · 揀你嘅咖啡，貼去你嘅 AI 傾偈</footer>
+</div>
+
+<script>
+function copyPrompt(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerText;
+    btn.innerText = '✅ 已複製！';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = orig;
+      btn.classList.remove('copied');
+    }, 1800);
+  }).catch(() => {
+    // 後備方案
+    const range = document.createRange();
+    range.selectNode(document.getElementById(id));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    btn.innerText = '✅ 已複製！';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = '📋 複製 Prompt';
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+}
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"f7a3268ea56841db8cf028773ac41ab7"}' crossorigin="anonymous"></script>
+</body>
+</html>
