@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>收集X的網站</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    color: #e0e0e0;
+    padding: 24px 16px 48px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .back-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 28px;
+    padding: 10px 28px;
+    background: linear-gradient(90deg, #7c3aed, #2563eb);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.55);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    display: block;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(167, 139, 250, 0.4);
+  }
+  .card-desc {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
+    color: #f0f0f0;
+  }
+  .card-domain {
+    font-size: 0.8rem;
+    color: #a78bfa;
+    opacity: 0.9;
+  }
+  footer {
+    text-align: center;
+    margin-top: 36px;
+    font-size: 0.8rem;
+    color: #888;
+  }
+  footer a { color: #a78bfa; text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>收集X的網站</h1>
+    <a class="back-btn" href="https://terry20250224.github.io/terrypages/multi-search.html">回主頁</a>
+    <div class="grid">
+      <a class="card" href="https://raphael.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">免费无限AI生成图片，质量媲美Midjourney</div>
+        <div class="card-domain">raphael.ai</div>
+      </a>
+      <a class="card" href="https://www.krea.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">实时AI生成图片，边画边出图</div>
+        <div class="card-domain">krea.ai</div>
+      </a>
+      <a class="card" href="https://www.magnific.com/" target="_blank" rel="noopener">
+        <div class="card-desc">AI无限图片放大，细节自动填充</div>
+        <div class="card-domain">magnific.com</div>
+      </a>
+      <a class="card" href="https://clipdrop.co/" target="_blank" rel="noopener">
+        <div class="card-desc">AI一键去背景/修光/擦除</div>
+        <div class="card-domain">clipdrop.co</div>
+      </a>
+      <a class="card" href="https://elevenlabs.io/" target="_blank" rel="noopener">
+        <div class="card-desc">AI声音克隆，5秒学会任何嗓音</div>
+        <div class="card-domain">elevenlabs.io</div>
+      </a>
+      <a class="card" href="https://suno.com/" target="_blank" rel="noopener">
+        <div class="card-desc">输入歌词，自动生成完整歌曲</div>
+        <div class="card-domain">suno.com</div>
+      </a>
+      <a class="card" href="https://runway.com/" target="_blank" rel="noopener">
+        <div class="card-desc">AI视频生成先驱，免费Gen-3试用</div>
+        <div class="card-domain">runway.com</div>
+      </a>
+      <a class="card" href="https://klingai.com/app/" target="_blank" rel="noopener">
+        <div class="card-desc">快手Keling AI，最流畅的中文视频生成</div>
+        <div class="card-domain">klingai.com</div>
+      </a>
+      <a class="card" href="https://www.d-id.com/" target="_blank" rel="noopener">
+        <div class="card-desc">一张照片+一段音频，生成会说话的数字人</div>
+        <div class="card-domain">d-id.com</div>
+      </a>
+      <a class="card" href="https://sadtalker.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">静态照片变会说话视频</div>
+        <div class="card-domain">sadtalker.ai</div>
+      </a>
+      <a class="card" href="https://cursor.com/" target="_blank" rel="noopener">
+        <div class="card-desc">AI代码写手，免费额度够日常用</div>
+        <div class="card-domain">cursor.com</div>
+      </a>
+      <a class="card" href="https://bolt.new/" target="_blank" rel="noopener">
+        <div class="card-desc">说话建网站，零代码</div>
+        <div class="card-domain">bolt.new</div>
+      </a>
+      <a class="card" href="https://v0.app/" target="_blank" rel="noopener">
+        <div class="card-desc">Vercel AI前端生成器，描述变网页</div>
+        <div class="card-domain">v0.app</div>
+      </a>
+      <a class="card" href="https://replit.com/" target="_blank" rel="noopener">
+        <div class="card-desc">浏览器编程+AI辅助，一键部署</div>
+        <div class="card-domain">replit.com</div>
+      </a>
+      <a class="card" href="https://www.napkin.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">粘贴文本，自动生成信息图</div>
+        <div class="card-domain">napkin.ai</div>
+      </a>
+      <a class="card" href="https://gamma.app/" target="_blank" rel="noopener">
+        <div class="card-desc">AI一键PPT生成，告别PPT地狱</div>
+        <div class="card-domain">gamma.app</div>
+      </a>
+      <a class="card" href="https://www.notion.com/product/ai" target="_blank" rel="noopener">
+        <div class="card-desc">Notion AI，写作/总结/翻译</div>
+        <div class="card-domain">notion.com</div>
+      </a>
+      <a class="card" href="https://uizard.io/" target="_blank" rel="noopener">
+        <div class="card-desc">画个草图，AI生成真实网页</div>
+        <div class="card-domain">uizard.io</div>
+      </a>
+      <a class="card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">AI搜索引擎，秒出答案+来源</div>
+        <div class="card-domain">perplexity.ai</div>
+      </a>
+      <a class="card" href="https://phind.com/" target="_blank" rel="noopener">
+        <div class="card-desc">开发者专属AI搜索，代码问题搜索即解</div>
+        <div class="card-domain">phind.com</div>
+      </a>
+      <a class="card" href="https://otter.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">实时会议转录，免费月300分钟</div>
+        <div class="card-domain">otter.ai</div>
+      </a>
+      <a class="card" href="https://www.opus.pro/" target="_blank" rel="noopener">
+        <div class="card-desc">AI短视频编辑，自动找精彩片段</div>
+        <div class="card-domain">opus.pro</div>
+      </a>
+      <a class="card" href="https://poe.com/" target="_blank" rel="noopener">
+        <div class="card-desc">一站式用GPT-4o/Claude/Gemini</div>
+        <div class="card-domain">poe.com</div>
+      </a>
+      <a class="card" href="https://huggingface.co/spaces" target="_blank" rel="noopener">
+        <div class="card-desc">开源AI模型免费试玩</div>
+        <div class="card-domain">huggingface.co</div>
+      </a>
+      <a class="card" href="https://www.remove.bg/" target="_blank" rel="noopener">
+        <div class="card-desc">一键AI去背景，1秒出图</div>
+        <div class="card-domain">remove.bg</div>
+      </a>
+      <a class="card" href="https://cleanup.pictures/" target="_blank" rel="noopener">
+        <div class="card-desc">AI从照片删除任意物体</div>
+        <div class="card-domain">cleanup.pictures</div>
+      </a>
+      <a class="card" href="https://www.deepswap.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">AI换脸，1分钟出图</div>
+        <div class="card-domain">deepswap.ai</div>
+      </a>
+      <a class="card" href="https://soundcloud.com/" target="_blank" rel="noopener">
+        <div class="card-desc">AI音乐标签+推荐</div>
+        <div class="card-domain">soundcloud.com</div>
+      </a>
+      <a class="card" href="https://www.jasper.ai/free" target="_blank" rel="noopener">
+        <div class="card-desc">AI写作助手，免费版够日常用</div>
+        <div class="card-domain">jasper.ai</div>
+      </a>
+      <a class="card" href="https://claude.ai/" target="_blank" rel="noopener">
+        <div class="card-desc">Anthropic免费AI助手，长文本处理顶级</div>
+        <div class="card-domain">claude.ai</div>
+      </a>
+    </div>
+    <footer>
+      資料來源：<a href="https://x.com/xiaoying_eth/status/2089895637043359994" target="_blank" rel="noopener">@xiaoying_eth 的貼文</a>
+    </footer>
+  </div>
+</body>
+</html>
