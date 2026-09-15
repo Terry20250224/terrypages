@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>收集X的網站</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    color: #e0e0e0;
+    padding: 20px;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .back-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 28px;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(102, 126, 234, 0.5);
+  }
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  .card-domain {
+    font-size: 0.85rem;
+    color: #a0a0c0;
+    word-break: break-all;
+  }
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: #8888aa;
+  }
+  footer a {
+    color: #a0a0ff;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>收集X的網站</h1>
+    <a class="back-btn" href="https://terry20250224.github.io/terrypages/multi-search.html">回主頁</a>
+    <div class="grid">
+      <a class="card" href="https://www.xiaozhongjishu.com/" target="_blank" rel="noopener">
+        <div class="card-title">資源站，影視片、動作片各種都有，非影視的實用工具和免費資源、軟件、電子書、素材，分類細、頁面乾淨</div>
+        <div class="card-domain">xiaozhongjishu.com</div>
+      </a>
+    </div>
+    <footer>
+      資料來源：<a href="https://x.com/huoshan007/status/2090344584056541630" target="_blank" rel="noopener">@huoshan007 的 X 貼文</a>
+    </footer>
+  </div>
+</body>
+</html>

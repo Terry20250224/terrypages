@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國際AI劇作演示賽｜總指揮工具</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #111827;
+    --border: #1e293b;
+    --accent: #22d3ee;
+    --accent2: #a78bfa;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --success: #34d399;
+    --danger: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Noto Sans TC", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(34, 211, 238, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    font-size: 1.6rem;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  header p { color: var(--muted); font-size: 0.9rem; }
+  .progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .progress::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .step-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1;
+    color: var(--muted);
+    transition: all 0.3s;
+  }
+  .step-dot.active {
+    border-color: var(--accent);
+    background: rgba(34, 211, 238, 0.15);
+    color: var(--accent);
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
+  }
+  .step-dot.done {
+    border-color: var(--success);
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--success);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+  .card h2 {
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  textarea { min-height: 120px; resize: vertical; }
+  .radio-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    color: var(--text);
+    margin: 0;
+    transition: all 0.2s;
+  }
+  .radio-group input { display: none; }
+  .radio-group label:has(input:checked) {
+    border-color: var(--accent);
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--accent);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    color: #fff;
+  }
+  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-secondary {
+    background: #1e293b;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+  }
+  .btn-success:hover { filter: brightness(1.1); }
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .prompt-box {
+    background: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: "Cascadia Code", "Fira Code", monospace;
+    font-size: 0.82rem;
+    white-space: pre-wrap;
+    max-height: 320px;
+    overflow-y: auto;
+    color: #cbd5e1;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .hint {
+    background: rgba(34, 211, 238, 0.08);
+    border-left: 3px solid var(--accent);
+    padding: 12px 14px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .result-box {
+    background: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  .hidden { display: none !important; }
+  .lang-toggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+  <button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button>
+  <div class="container">
+    <header>
+      <h1 id="title">國際AI劇作演示賽</h1>
+      <p id="subtitle">總指揮互動工具 · 透過 Gemini 完成專業劇作演示</p>
+    </header>
+
+    <div class="progress">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-dot" id="dot3">3</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="step1" class="card">
+      <h2 id="s1-title">① 輸入主題與設定</h2>
+      <label id="l-theme">主題內容（任何文字、新聞、概念、問題）</label>
+      <textarea id="theme" placeholder="例如：油價上漲對全球經濟的影響、AI 監管爭議、氣候變遷與能源轉型…"></textarea>
+
+      <label id="l-style">劇作形式／風格</label>
+      <input type="text" id="style" placeholder="例如：火影忍者人物、進擊的巨人、現代影視、喜劇、賽博龐克…">
+
+      <label id="l-count">演出角數</label>
+      <div class="radio-group">
+        <label><input type="radio" name="count" value="3" checked> 3角</label>
+        <label><input type="radio" name="count" value="6"> 6角</label>
+        <label><input type="radio" name="count" value="9"> 9角</label>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="goStep2()" id="btn-next1">下一步：生成提示詞</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step2" class="card hidden">
+      <h2 id="s2-title">② 複製提示詞到 Gemini</h2>
+      <div class="hint" id="hint2">
+        請點擊下方「一鍵複製」→ 貼到 <strong>Gemini in Chrome</strong>（右側 AI 欄）→ 等待 Gemini 完整產出後，再回來貼上結果。
+      </div>
+      <div class="prompt-box" id="promptBox"></div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="copyPrompt()" id="btn-copy">一鍵複製提示詞</button>
+        <button class="btn btn-secondary" onclick="goStep1()" id="btn-back2">返回修改</button>
+        <button class="btn btn-success" onclick="goStep3()" id="btn-next2">我已貼到 Gemini，進入下一步</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step3" class="card hidden">
+      <h2 id="s3-title">③ 貼回 Gemini 結果並展示</h2>
+      <label id="l-result">請將 Gemini 產出的完整內容貼在下方</label>
+      <textarea id="geminiResult" placeholder="在此貼上 Gemini 的完整回覆…" style="min-height:180px"></textarea>
+      <div class="btn-group" style="margin-bottom:20px">
+        <button class="btn btn-primary" onclick="showFinal()" id="btn-show">展示最終結果</button>
+        <button class="btn btn-secondary" onclick="goStep2()" id="btn-back3">返回上一步</button>
+      </div>
+
+      <div id="finalArea" class="hidden">
+        <h2 id="final-title">正式劇作結果</h2>
+        <div class="result-box" id="finalResult"></div>
+        <div class="btn-group" style="margin-top:16px">
+          <button class="btn btn-success" onclick="copyFinal()" id="btn-copy-final">一鍵複製結果</button>
+          <button class="btn btn-secondary" onclick="downloadFinal()" id="btn-dl">下載結果 (.txt)</button>
+          <button class="btn btn-secondary" onclick="resetAll()" id="btn-reset">重新開始</button>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">純前端工具 · 資料僅存於本機 · 可直接上傳 GitHub Pages</footer>
+  </div>
+
+<script>
+const SYSTEM_PROMPT = `你是「國際AI劇作演示賽」的總指揮，同時統籌另外15位AI演員。你的唯一任務是：根據用家輸入的任何主題內容，即時以劇作形式進行專業講解與演示。
+基本設定
+這是一場世界級AI比賽的模擬演示。
+你是總指揮，負責統籌全局、分配角色、控制節奏、必要時以旁白或解說介入。
+共有15位演員，編號1至15，分為ABC三團，每團5人。三團之間是競爭關係，但演員全部可合演，且具備跨風格演出能力。
+不需要評分、不需要選拔、不需要宣布勝負，只需輸出高品質的劇作演示與講解。
+演員編制（固定）
+A團（動畫專長）
+1號：經濟學家（宏觀經濟、能源、商品價格）
+2號：國際關係學者（地緣政治、國際衝突）
+3號：心理學家（行為、認知偏誤、決策心理）
+4號：歷史學家（近代史、經濟史、能源史）
+5號：科技觀察者（AI、數位趨勢、創新）
+B團（現代影視專長）
+6號：金融分析師（市場、投資、油價、供需）
+7號：社會學家（社會結構、階層、輿論）
+8號：環境科學家（氣候、能源轉型、永續）
+9號：政治評論員（政策、選舉、監管）
+10號：商業策略顧問（企業、供應鏈、定價策略）
+C團（萬用多功能）
+11號：哲學家（倫理、價值觀、底層邏輯）
+12號：數據科學家（數據解讀、統計、預測）
+13號：傳播學者（媒體、敘事、公眾認知）
+14號：法律專家（法規、合約、國際法）
+15號：系統思考專家（複雜系統、因果迴路、全局觀）
+用家輸入處理規則
+用家會提供：
+主題內容（任何文字、新聞、概念、問題等）
+劇作形式／風格（例如：火影忍者人物、某種動畫、現代影視、喜劇等）
+演出角數（3角、6角或9角）
+你必須：
+根據主題選擇最適合的專業演員組合
+盡量從ABC三團混合抽人，保持合演與競爭氛圍
+嚴格按照用家指定的角數安排角色
+把指定的劇作風格完整融入（外殼用指定風格，內核保持專業內容）
+輸出格式要求
+每次回答請按以下結構輸出：
+總指揮簡報（簡短說明本次調度邏輯與選角理由）
+演出陣容（列出參與的編號、原專業、在本劇中的角色名稱）
+正式劇作（完整對白、舞台指示、旁白，以指定風格呈現，並自然融入專業講解）
+總指揮結語（簡要總結本劇如何講解了主題，不評價勝負）
+重要原則
+專業性優先：即使外殼是動畫或誇張風格，核心內容必須準確、有深度、有邏輯。
+風格服從：嚴格遵循用家指定的劇作形式。
+合演自然：不同團的演員可以同台對話、衝突、互補。
+節奏清晰：劇作要有起承轉合，避免流水帳。
+語言流暢：對白要符合角色個性與指定風格，同時能讓一般人看懂專業內容。
+現在開始待命。用家一輸入主題、風格與角數，你就立刻以總指揮身份啟動劇作演示。`;
+
+let currentLang = 'zh';
+const texts = {
+  zh: {
+    title: '國際AI劇作演示賽',
+    subtitle: '總指揮互動工具 · 透過 Gemini 完成專業劇作演示',
+    s1: '① 輸入主題與設定',
+    lTheme: '主題內容（任何文字、新聞、概念、問題）',
+    lStyle: '劇作形式／風格',
+    lCount: '演出角數',
+    next1: '下一步：生成提示詞',
+    s2: '② 複製提示詞到 Gemini',
+    hint2: '請點擊下方「一鍵複製」→ 貼到 <strong>Gemini in Chrome</strong>（右側 AI 欄）→ 等待 Gemini 完整產出後，再回來貼上結果。',
+    copy: '一鍵複製提示詞',
+    back2: '返回修改',
+    next2: '我已貼到 Gemini，進入下一步',
+    s3: '③ 貼回 Gemini 結果並展示',
+    lResult: '請將 Gemini 產出的完整內容貼在下方',
+    show: '展示最終結果',
+    back3: '返回上一步',
+    finalTitle: '正式劇作結果',
+    copyFinal: '一鍵複製結果',
+    dl: '下載結果 (.txt)',
+    reset: '重新開始',
+    footer: '純前端工具 · 資料僅存於本機 · 可直接上傳 GitHub Pages'
+  },
+  en: {
+    title: 'International AI Drama Demo',
+    subtitle: 'Director Tool · Complete professional drama via Gemini',
+    s1: '① Enter Theme & Settings',
+    lTheme: 'Theme content (any text, news, concept, question)',
+    lStyle: 'Drama style / format',
+    lCount: 'Number of actors',
+    next1: 'Next: Generate Prompt',
+    s2: '② Copy Prompt to Gemini',
+    hint2: 'Click “Copy Prompt” → paste into <strong>Gemini in Chrome</strong> → after Gemini finishes, come back and paste the result.',
+    copy: 'Copy Prompt',
+    back2: 'Back to Edit',
+    next2: 'I pasted to Gemini, Next',
+    s3: '③ Paste Gemini Result & Display',
+    lResult: 'Paste the full response from Gemini below',
+    show: 'Show Final Result',
+    back3: 'Back',
+    finalTitle: 'Final Drama Result',
+    copyFinal: 'Copy Result',
+    dl: 'Download (.txt)',
+    reset: 'Start Over',
+    footer: 'Pure frontend · Data stays local · Ready for GitHub Pages'
+  }
+};
+
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  const t = texts[currentLang];
+  document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中文';
+  document.getElementById('title').textContent = t.title;
+  document.getElementById('subtitle').textContent = t.subtitle;
+  document.getElementById('s1-title').textContent = t.s1;
+  document.getElementById('l-theme').textContent = t.lTheme;
+  document.getElementById('l-style').textContent = t.lStyle;
+  document.getElementById('l-count').textContent = t.lCount;
+  document.getElementById('btn-next1').textContent = t.next1;
+  document.getElementById('s2-title').textContent = t.s2;
+  document.getElementById('hint2').innerHTML = t.hint2;
+  document.getElementById('btn-copy').textContent = t.copy;
+  document.getElementById('btn-back2').textContent = t.back2;
+  document.getElementById('btn-next2').textContent = t.next2;
+  document.getElementById('s3-title').textContent = t.s3;
+  document.getElementById('l-result').textContent = t.lResult;
+  document.getElementById('btn-show').textContent = t.show;
+  document.getElementById('btn-back3').textContent = t.back3;
+  document.getElementById('final-title').textContent = t.finalTitle;
+  document.getElementById('btn-copy-final').textContent = t.copyFinal;
+  document.getElementById('btn-dl').textContent = t.dl;
+  document.getElementById('btn-reset').textContent = t.reset;
+  document.getElementById('footer').textContent = t.footer;
+}
+
+function saveState() {
+  const data = {
+    theme: document.getElementById('theme').value,
+    style: document.getElementById('style').value,
+    count: document.querySelector('input[name="count"]:checked')?.value || '3',
+    result: document.getElementById('geminiResult').value,
+    step: getCurrentStep()
+  };
+  localStorage.setItem('ai-drama-tool', JSON.stringify(data));
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem('ai-drama-tool');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.theme) document.getElementById('theme').value = data.theme;
+    if (data.style) document.getElementById('style').value = data.style;
+    if (data.count) {
+      const radio = document.querySelector(`input[name="count"][value="${data.count}"]`);
+      if (radio) radio.checked = true;
+    }
+    if (data.result) document.getElementById('geminiResult').value = data.result;
+    if (data.step === 2) goStep2(true);
+    else if (data.step === 3) goStep3(true);
+  } catch(e) {}
+}
+
+function getCurrentStep() {
+  if (!document.getElementById('step1').classList.contains('hidden')) return 1;
+  if (!document.getElementById('step2').classList.contains('hidden')) return 2;
+  return 3;
+}
+
+function setDots(step) {
+  [1,2,3].forEach(i => {
+    const d = document.getElementById('dot'+i);
+    d.classList.remove('active','done');
+    if (i < step) d.classList.add('done');
+    if (i === step) d.classList.add('active');
+  });
+}
+
+function goStep1() {
+  document.getElementById('step1').classList.remove('hidden');
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.add('hidden');
+  setDots(1);
+  saveState();
+}
+
+function goStep2(skipBuild) {
+  const theme = document.getElementById('theme').value.trim();
+  const style = document.getElementById('style').value.trim();
+  const count = document.querySelector('input[name="count"]:checked').value;
+  if (!skipBuild) {
+    if (!theme) { alert(currentLang==='zh' ? '請先輸入主題內容' : 'Please enter theme content'); return; }
+    if (!style) { alert(currentLang==='zh' ? '請先輸入劇作風格' : 'Please enter drama style'); return; }
+  }
+  const fullPrompt = SYSTEM_PROMPT + `
+
+【本次用家輸入】
+主題內容：
+${theme}
+
+劇作形式／風格：
+${style}
+
+演出角數：
+${count}角
+
+請立刻以總指揮身份啟動本次劇作演示。`;
+  document.getElementById('promptBox').textContent = fullPrompt;
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+  document.getElementById('step3').classList.add('hidden');
+  setDots(2);
+  saveState();
+}
+
+function goStep3(skip) {
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.remove('hidden');
+  setDots(3);
+  saveState();
+}
+
+function copyPrompt() {
+  const text = document.getElementById('promptBox').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btn-copy');
+    const old = btn.textContent;
+    btn.textContent = currentLang==='zh' ? '已複製！' : 'Copied!';
+    setTimeout(() => btn.textContent = old, 1800);
+  });
+}
+
+function showFinal() {
+  const result = document.getElementById('geminiResult').value.trim();
+  if (!result) {
+    alert(currentLang==='zh' ? '請先貼上 Gemini 的回覆' : 'Please paste Gemini response first');
+    return;
+  }
+  document.getElementById('finalResult').textContent = result;
+  document.getElementById('finalArea').classList.remove('hidden');
+  saveState();
+}
+
+function copyFinal() {
+  const text = document.getElementById('finalResult').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btn-copy-final');
+    const old = btn.textContent;
+    btn.textContent = currentLang==='zh' ? '已複製！' : 'Copied!';
+    setTimeout(() => btn.textContent = old, 1800);
+  });
+}
+
+function downloadFinal() {
+  const text = document.getElementById('finalResult').textContent;
+  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'AI劇作演示結果.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function resetAll() {
+  if (confirm(currentLang==='zh' ? '確定要清空所有內容並重新開始？' : 'Clear everything and start over?')) {
+    localStorage.removeItem('ai-drama-tool');
+    location.reload();
+  }
+}
+
+// init
+loadState();
+</script>
+</body>
+</html>

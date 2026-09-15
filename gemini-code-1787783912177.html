@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球即時資訊牆 (上下獨立列陣)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .news-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .news-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .news-section h2 {
+            color: #003366;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .news-scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .news-scroll-container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+        .news-card {
+            flex: 0 0 260px;
+            width: 260px;
+            background: #fafbfc;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eaeaea;
+        }
+        .news-card-title {
+            font-size: 0.95em;
+            font-weight: bold;
+            color: #0066cc;
+            text-decoration: none;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .news-card-title:hover {
+            text-decoration: underline;
+        }
+        .news-card-date {
+            font-size: 0.75em;
+            color: #888;
+        }
+        .news-loading {
+            color: #666;
+            font-size: 0.9em;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="news-wrapper">
+        <div class="news-section">
+            <h2>🇭🇰 香港電台本地新聞</h2>
+            <div id="container-rthk" class="news-scroll-container">
+                <div class="news-loading">正在載入新聞...</div>
+            </div>
+        </div>
+
+        <div class="news-section">
+            <h2>🌍 BBC 國際新聞</h2>
+            <div id="container-bbc" class="news-scroll-container">
+                <div class="news-loading">正在載入新聞...</div>
+            </div>
+        </div>
+
+        <div class="news-section">
+            <h2>💻 TechCrunch 科技新聞</h2>
+            <div id="container-techcrunch" class="news-scroll-container">
+                <div class="news-loading">正在載入新聞...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchAndRenderRow(url, containerId) {
+            const container = document.getElementById(containerId);
+            const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+            
+            try {
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error('連線失敗');
+                const xmlText = await response.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                
+                // Use getElementsByTagName to safely catch items/entries regardless of namespaces
+                let items = xmlDoc.getElementsByTagName('item');
+                if (items.length === 0) {
+                    items = xmlDoc.getElementsByTagName('entry');
+                }
+                
+                let htmlContent = '';
+                const limit = Math.min(items.length, 6);
+                
+                for (let i = 0; i < limit; i++) {
+                    const item = items[i];
+                    
+                    const titleEl = item.getElementsByTagName('title')[0];
+                    const title = titleEl ? titleEl.textContent : '無標題';
+                    
+                    let link = '#';
+                    const linkEl = item.getElementsByTagName('link')[0];
+                    if (linkEl) {
+                        link = linkEl.getAttribute('href') || linkEl.textContent || '#';
+                    }
+                    
+                    const pubDateEl = item.getElementsByTagName('pubDate')[0] || 
+                                      item.getElementsByTagName('published')[0] || 
+                                      item.getElementsByTagName('updated')[0];
+                    const dateStr = pubDateEl ? pubDateEl.textContent : '';
+                    
+                    let timeFormatted = '';
+                    if (dateStr) {
+                        const dateObj = new Date(dateStr);
+                        if (!isNaN(dateObj.getTime())) {
+                            timeFormatted = `${dateObj.getMonth() + 1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
+                        }
+                    }
+
+                    htmlContent += `
+                        <div class="news-card">
+                            <a href="${link.trim()}" class="news-card-title" target="_blank" rel="noopener noreferrer">${title.trim()}</a>
+                            <div class="news-card-date">${timeFormatted}</div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = htmlContent || '<div class="news-loading">暫無資料</div>';
+            } catch (error) {
+                container.innerHTML = `<div class="news-loading" style="color:red;">載入失敗 (請檢查 CORS 代理或網路)</div>`;
+            }
+        }
+
+        fetchAndRenderRow('https://rthk.hk/rthk/news/rss/c_expressnews_clocal.xml', 'container-rthk');
+        fetchAndRenderRow('https://feeds.bbci.co.uk/news/world/rss.xml', 'container-bbc');
+        fetchAndRenderRow('https://techcrunch.com/feed/', 'container-techcrunch');
+    </script>
+
+</body>
+</html>

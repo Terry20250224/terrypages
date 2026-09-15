@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>收集X的網站</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      color: #e0e0e0;
+      padding: 20px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+    .back-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 28px;
+      padding: 12px 28px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .card-domain {
+      font-size: 0.85rem;
+      color: #a0a0c0;
+      word-break: break-all;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.8rem;
+      color: #8888aa;
+    }
+    footer a {
+      color: #a0a0c0;
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>收集X的網站</h1>
+    <a class="back-btn" href="https://terry20250224.github.io/terrypages/multi-search.html">回主頁</a>
+    
+    <div class="grid">
+      <a class="card" href="https://suohaai.top/" target="_blank" rel="noopener">
+        <div class="card-title">万能美股研究台（StockXI）</div>
+        <div class="card-domain">suohaai.top</div>
+      </a>
+      
+      <a class="card" href="https://www.quiverquant.com/" target="_blank" rel="noopener">
+        <div class="card-title">美股另类数据工具</div>
+        <div class="card-domain">quiverquant.com</div>
+      </a>
+      
+      <a class="card" href="https://www.reuters.com/" target="_blank" rel="noopener">
+        <div class="card-title">路透社新闻资讯</div>
+        <div class="card-domain">reuters.com</div>
+      </a>
+      
+      <a class="card" href="https://www.tradingview.com/" target="_blank" rel="noopener">
+        <div class="card-title">图表与技术分析工具</div>
+        <div class="card-domain">tradingview.com</div>
+      </a>
+      
+      <a class="card" href="https://stockanalysis.com/" target="_blank" rel="noopener">
+        <div class="card-title">查财报估值分析师预期</div>
+        <div class="card-domain">stockanalysis.com</div>
+      </a>
+      
+      <a class="card" href="https://companiesmarketcap.com/" target="_blank" rel="noopener">
+        <div class="card-title">全球市值排名，找龙头方便</div>
+        <div class="card-domain">companiesmarketcap.com</div>
+      </a>
+    </div>
+    
+    <footer>
+      数据来源：<a href="https://x.com/zhizhuxia22/status/2091419088371454352" target="_blank" rel="noopener">@zhizhuxia22 的 X 帖</a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>收集X的網站</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .back-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 28px;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102,126,234,0.6);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s, transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    min-height: 90px;
+  }
+  .card:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(102,126,234,0.5);
+    transform: translateY(-3px);
+  }
+  .card-desc {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    flex-grow: 1;
+    margin-bottom: 10px;
+  }
+  .card-domain {
+    font-size: 0.8rem;
+    color: #a0a0c0;
+    word-break: break-all;
+  }
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #888;
+  }
+  footer a {
+    color: #667eea;
+    text-decoration: none;
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 1.4rem; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>收集X的網站</h1>
+    <a class="back-btn" href="https://terry20250224.github.io/terrypages/multi-search.html">回主頁</a>
+    <div class="grid">
+      <a class="card" href="https://unpaywall.org/" target="_blank" rel="noopener">
+        <div class="card-desc">免费研究论文搜索</div>
+        <div class="card-domain">unpaywall.org</div>
+      </a>
+      <a class="card" href="https://openlibrary.org/" target="_blank" rel="noopener">
+        <div class="card-desc">在线借阅图书</div>
+        <div class="card-domain">openlibrary.org</div>
+      </a>
+      <a class="card" href="https://www.theailibrary.co/" target="_blank" rel="noopener">
+        <div class="card-desc">浏览 5000+ AI 工具</div>
+        <div class="card-domain">theailibrary.co</div>
+      </a>
+      <a class="card" href="https://gutenberg.org/" target="_blank" rel="noopener">
+        <div class="card-desc">70K+ 免费电子书</div>
+        <div class="card-domain">gutenberg.org</div>
+      </a>
+      <a class="card" href="https://www.portfoliotab.io/" target="_blank" rel="noopener">
+        <div class="card-desc">创建品牌可发现的作品集</div>
+        <div class="card-domain">portfoliotab.io</div>
+      </a>
+      <a class="card" href="https://openstax.org/" target="_blank" rel="noopener">
+        <div class="card-desc">免费大学教科书</div>
+        <div class="card-domain">openstax.org</div>
+      </a>
+      <a class="card" href="https://www.openculture.com/" target="_blank" rel="noopener">
+        <div class="card-desc">免费课程和学习资源</div>
+        <div class="card-domain">openculture.com</div>
+      </a>
+      <a class="card" href="https://doaj.org/" target="_blank" rel="noopener">
+        <div class="card-desc">开放获取学术期刊</div>
+        <div class="card-domain">doaj.org</div>
+      </a>
+      <a class="card" href="https://www.semanticscholar.org/" target="_blank" rel="noopener">
+        <div class="card-desc">搜索学术研究</div>
+        <div class="card-domain">semanticscholar.org</div>
+      </a>
+      <a class="card" href="https://www.connectedpapers.com/index.html" target="_blank" rel="noopener">
+        <div class="card-desc">论文关联可视化</div>
+        <div class="card-domain">connectedpapers.com</div>
+      </a>
+      <a class="card" href="https://scispace.com/" target="_blank" rel="noopener">
+        <div class="card-desc">让难懂的论文更易理解</div>
+        <div class="card-domain">scispace.com</div>
+      </a>
+      <a class="card" href="https://elicit.com/" target="_blank" rel="noopener">
+        <div class="card-desc">AI 驱动的研究助手</div>
+        <div class="card-domain">elicit.com</div>
+      </a>
+      <a class="card" href="https://consensus.app/" target="_blank" rel="noopener">
+        <div class="card-desc">获得有研究支持的答案</div>
+        <div class="card-domain">consensus.app</div>
+      </a>
+      <a class="card" href="https://summarize.tech/" target="_blank" rel="noopener">
+        <div class="card-desc">YouTube 视频总结</div>
+        <div class="card-domain">summarize.tech</div>
+      </a>
+      <a class="card" href="https://notebooklm.google.com/" target="_blank" rel="noopener">
+        <div class="card-desc">文档转学习指南</div>
+        <div class="card-domain">notebooklm.google.com</div>
+      </a>
+      <a class="card" href="https://www.wolframalpha.com/" target="_blank" rel="noopener">
+        <div class="card-desc">解决高阶问题</div>
+        <div class="card-domain">wolframalpha.com</div>
+      </a>
+      <a class="card" href="https://www.photopea.com/" target="_blank" rel="noopener">
+        <div class="card-desc">浏览器内的 Photoshop 级编辑</div>
+        <div class="card-domain">photopea.com</div>
+      </a>
+      <a class="card" href="https://squoosh.app/" target="_blank" rel="noopener">
+        <div class="card-desc">高质量图片压缩</div>
+        <div class="card-domain">squoosh.app</div>
+      </a>
+      <a class="card" href="https://www.remove.bg/" target="_blank" rel="noopener">
+        <div class="card-desc">移除图片背景</div>
+        <div class="card-domain">remove.bg</div>
+      </a>
+      <a class="card" href="https://cleanup.pictures/" target="_blank" rel="noopener">
+        <div class="card-desc">移除照片中的不需要物体</div>
+        <div class="card-domain">cleanup.pictures</div>
+      </a>
+      <a class="card" href="https://www.canva.com/features/video-background-remover/" target="_blank" rel="noopener">
+        <div class="card-desc">移除视频背景</div>
+        <div class="card-domain">canva.com</div>
+      </a>
+      <a class="card" href="https://shots.so/" target="_blank" rel="noopener">
+        <div class="card-desc">创建精美产品效果图</div>
+        <div class="card-domain">shots.so</div>
+      </a>
+      <a class="card" href="https://ray.so/" target="_blank" rel="noopener">
+        <div class="card-desc">代码转清晰截图</div>
+        <div class="card-domain">ray.so</div>
+      </a>
+      <a class="card" href="https://haveibeenpwned.com/" target="_blank" rel="noopener">
+        <div class="card-desc">检查你的数据是否被泄露</div>
+        <div class="card-domain">haveibeenpwned.com</div>
+      </a>
+      <a class="card" href="https://virustotal.com/" target="_blank" rel="noopener">
+        <div class="card-desc">扫描文件和链接的威胁</div>
+        <div class="card-domain">virustotal.com</div>
+      </a>
+      <a class="card" href="https://privnote.com/" target="_blank" rel="noopener">
+        <div class="card-desc">创建自毁便签</div>
+        <div class="card-domain">privnote.com</div>
+      </a>
+      <a class="card" href="https://temp-mail.org/" target="_blank" rel="noopener">
+        <div class="card-desc">生成临时邮箱地址</div>
+        <div class="card-domain">temp-mail.org</div>
+      </a>
+      <a class="card" href="https://backgroundchecks.org/justdeleteme/" target="_blank" rel="noopener">
+        <div class="card-desc">查找账号删除教程</div>
+        <div class="card-domain">backgroundchecks.org</div>
+      </a>
+      <a class="card" href="https://namechk.com/" target="_blank" rel="noopener">
+        <div class="card-desc">检查用户名可用性</div>
+        <div class="card-domain">namechk.com</div>
+      </a>
+      <a class="card" href="https://tineye.com/" target="_blank" rel="noopener">
+        <div class="card-desc">反向图片搜索</div>
+        <div class="card-domain">tineye.com</div>
+      </a>
+      <a class="card" href="https://www.ilovepdf.com/" target="_blank" rel="noopener">
+        <div class="card-desc">合并、分割和压缩 PDF</div>
+        <div class="card-domain">ilovepdf.com</div>
+      </a>
+      <a class="card" href="https://www.file.io/" target="_blank" rel="noopener">
+        <div class="card-desc">临时文件分享</div>
+        <div class="card-domain">file.io</div>
+      </a>
+      <a class="card" href="https://wetransfer.com/" target="_blank" rel="noopener">
+        <div class="card-desc">发送大文件</div>
+        <div class="card-domain">wetransfer.com</div>
+      </a>
+      <a class="card" href="https://codebeautify.org/" target="_blank" rel="noopener">
+        <div class="card-desc">格式化代码和数据</div>
+        <div class="card-domain">codebeautify.org</div>
+      </a>
+      <a class="card" href="https://archive.org/" target="_blank" rel="noopener">
+        <div class="card-desc">探索互联网档案馆</div>
+        <div class="card-domain">archive.org</div>
+      </a>
+      <a class="card" href="https://archive.ph/" target="_blank" rel="noopener">
+        <div class="card-desc">网页消失前快速保存</div>
+        <div class="card-domain">archive.ph</div>
+      </a>
+      <a class="card" href="https://downdetector.com/" target="_blank" rel="noopener">
+        <div class="card-desc">检查服务是否宕机</div>
+        <div class="card-domain">downdetector.com</div>
+      </a>
+      <a class="card" href="https://fast.com/" target="_blank" rel="noopener">
+        <div class="card-desc">检测网速</div>
+        <div class="card-domain">fast.com</div>
+      </a>
+      <a class="card" href="https://alternativeto.net/" target="_blank" rel="noopener">
+        <div class="card-desc">查找几乎任何应用的替代品</div>
+        <div class="card-domain">alternativeto.net</div>
+      </a>
+      <a class="card" href="https://similarsites.com/" target="_blank" rel="noopener">
+        <div class="card-desc">发现类似的网站</div>
+        <div class="card-domain">similarsites.com</div>
+      </a>
+      <a class="card" href="https://musicforprogramming.net/" target="_blank" rel="noopener">
+        <div class="card-desc">专注工作背景音乐</div>
+        <div class="card-domain">musicforprogramming.net</div>
+      </a>
+      <a class="card" href="https://mynoise.net/" target="_blank" rel="noopener">
+        <div class="card-desc">创建自定义环境音</div>
+        <div class="card-domain">mynoise.net</div>
+      </a>
+      <a class="card" href="https://coffitivity.com/" target="_blank" rel="noopener">
+        <div class="card-desc">咖啡馆工作氛围模拟</div>
+        <div class="card-domain">coffitivity.com</div>
+      </a>
+      <a class="card" href="https://radio.garden/" target="_blank" rel="noopener">
+        <div class="card-desc">全球实时广播电台</div>
+        <div class="card-domain">radio.garden</div>
+      </a>
+      <a class="card" href="https://everynoise.com/" target="_blank" rel="noopener">
+        <div class="card-desc">浏览数千音乐风格</div>
+        <div class="card-domain">everynoise.com</div>
+      </a>
+      <a class="card" href="https://www.tunefind.com/" target="_blank" rel="noopener">
+        <div class="card-desc">电影和电视剧歌曲辨识</div>
+        <div class="card-domain">tunefind.com</div>
+      </a>
+      <a class="card" href="https://www.justwatch.com/" target="_blank" rel="noopener">
+        <div class="card-desc">查找电影/剧集的流媒体平台</div>
+        <div class="card-domain">justwatch.com</div>
+      </a>
+      <a class="card" href="https://regex101.com/" target="_blank" rel="noopener">
+        <div class="card-desc">正则表达式构建和测试</div>
+        <div class="card-domain">regex101.com</div>
+      </a>
+      <a class="card" href="https://explainshell.com/" target="_blank" rel="noopener">
+        <div class="card-desc">理解终端命令</div>
+        <div class="card-domain">explainshell.com</div>
+      </a>
+      <a class="card" href="https://www.deepl.com/en" target="_blank" rel="noopener">
+        <div class="card-desc">强大的 AI 翻译工具</div>
+        <div class="card-domain">deepl.com</div>
+      </a>
+    </div>
+    <footer>
+      数据来源：<a href="https://x.com/ChrisSlacker/status/2091465229456851157" target="_blank" rel="noopener">@ChrisSlacker 的 X 帖子</a>
+    </footer>
+  </div>
+</body>
+</html>
