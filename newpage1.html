@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>收集的網站</title>
+  <style>
+    :root {
+      --bg: #f5efe4;
+      --fg: #3a2f25;
+      --muted: #7a6b5b;
+      --btn-bg: #ffffff;
+      --btn-border: #d9cdba;
+      --btn-fg: #3a2f25;
+      --btn-hover-bg: #efe6d4;
+      --btn-hover-border: #b89b6f;
+      --shadow: 0 6px 24px rgba(80, 60, 40, 0.08);
+      --shadow-hover: 0 10px 32px rgba(80, 60, 40, 0.14);
+      --accent: #b89b6f;
+      --danger: #c0504d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1612;
+        --fg: #ece2d2;
+        --muted: #a89886;
+        --btn-bg: #2a2218;
+        --btn-border: #3a3024;
+        --btn-fg: #ece2d2;
+        --btn-hover-bg: #382c1e;
+        --btn-hover-border: #b89b6f;
+        --shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+        --shadow-hover: 0 10px 32px rgba(0, 0, 0, 0.5);
+        --accent: #b89b6f;
+        --danger: #d9706d;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   "PingFang TC", "Microsoft JhengHei", "Noto Sans TC",
+                   system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .hub {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .brand {
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--fg);
+      margin: 0;
+    }
+    .toolbar { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .back-btn, .add-btn, .tool-btn {
+      background: linear-gradient(135deg, #ffffff 0%, #f3e9d6 100%);
+      border: 1.5px solid var(--accent);
+      color: #3a2f25;
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+    .back-btn:hover, .add-btn:hover, .tool-btn:hover {
+      background: linear-gradient(135deg, #efe6d4 0%, #e2d2b0 100%);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    @media (prefers-color-scheme: dark) {
+      .back-btn, .add-btn, .tool-btn {
+        background: linear-gradient(135deg, #2a2218 0%, #3a2c1a 100%);
+        color: #f5efe4;
+        border-color: var(--accent);
+      }
+      .back-btn:hover, .add-btn:hover, .tool-btn:hover {
+        background: linear-gradient(135deg, #3a2c1a 0%, #4a3a24 100%);
+      }
+    }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .links { grid-template-columns: 1fr; }
+    }
+    .hub-card {
+      background: var(--btn-bg);
+      border: 1.5px solid var(--btn-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .hub-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--btn-hover-border);
+    }
+    .card-header {
+      background: var(--btn-hover-bg);
+      color: var(--btn-fg);
+      padding: 0.8rem 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--btn-border);
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .card-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      flex: 1;
+    }
+    .card-input {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      background: var(--bg);
+      border: 1px solid var(--btn-border);
+      border-radius: 8px;
+      color: var(--fg);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .card-input:focus { border-color: var(--accent); }
+    .card-actions { display: flex; gap: 0.5rem; }
+    .action-btn {
+      flex: 1;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s ease;
+    }
+    .action-btn:hover { opacity: 0.9; }
+    .action-btn:active { transform: scale(0.97); }
+    .btn-save { background-color: #6b8e23; color: #fff; }
+    .btn-go   { background-color: #b89b6f; color: #fff; }
+    .btn-del  { background-color: var(--danger); color: #fff; flex: 0 0 auto; padding: 0.6rem 0.8rem; }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: 3rem 1rem;
+      border: 1.5px dashed var(--btn-border);
+      border-radius: 16px;
+    }
+    .foot {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    #toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--fg);
+      color: var(--bg);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+  <main class="hub">
+    <div class="header-bar">
+      <h1 class="brand">收集的網站</h1>
+      <div class="toolbar">
+        <a class="back-btn" href="https://terry20250224.github.io/terrypages/multi-search.html">回主頁</a>
+        <button class="tool-btn" id="exportBtn" type="button">匯出備份</button>
+        <button class="tool-btn" id="importBtn" type="button">匯入備份</button>
+        <input type="file" id="importFile" accept=".json,application/json" hidden />
+        <button class="add-btn" id="addBtn" type="button">＋ 新增按鍵</button>
+      </div>
+    </div>
+    <div id="cardsContainer" class="links"></div>
+    <p class="foot">資料來源：Pockoo 場景「在线看动漫的网站」</p>
+  </main>
+  <div id="toast" role="status"></div>
+  <script>
+    (function () {
+      'use strict';
+      const STORAGE_KEY = 'hubCards.v1';
+      const DEFAULT_CARDS = [
+        { name: '聚合搜索全网动漫、电影、电视剧、综艺、美剧、韩剧，影视资源在线播放、无广告秒加载', url: 'https://projext.run/' },
+        { name: 'Animoe 动漫站', url: 'https://animoe.org' },
+        { name: 'E站动漫', url: 'https://www.ezdmw.org' },
+        { name: '番茄动漫', url: 'https://www.fqdm.cc' },
+        { name: '免费的聚合影视搜索网站', url: 'https://moovie.c2v2.com/' },
+        { name: '面向全球华人的免费在线影音平台，主要提供最新的中国大陆、香港、台湾的电视剧、电影和综艺节目', url: 'https://www.iyf.tv/' },
+        { name: '主打海外影视剧资源，致力于最轻松的追剧体验', url: 'https://www.novipnoad.cc/' },
+        { name: '专门推荐那些既没有乱七八糟弹窗广告又能免费白嫖的硬核网站和APP的导航站', url: 'https://yinghezhinan.com/' },
+        { name: '4K高清视频在线观看，高清无广告', url: 'https://ifn.watch/' },
+        { name: '每天分享优质电影、电视剧和动漫资讯，免费无需注册，更新及时', url: 'https://www.seedhub.cc/' }
+      ];
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, ch => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[ch]));
+      }
+
+      function normalizeUrl(raw) {
+        let url = String(raw || '').trim();
+        if (!url) return '';
+        if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)) url = 'https://' + url;
+        try { new URL(url); return url; } catch { return ''; }
+      }
+
+      let toastTimer = null;
+      function toast(msg) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+      }
+
+      function loadCards() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw === null) return null;
+          const data = JSON.parse(raw);
+          return Array.isArray(data) ? data.filter(c => c && typeof c === 'object') : null;
+        } catch { return null; }
+      }
+
+      function saveCards() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+      }
+
+      const container = document.getElementById('cardsContainer');
+      let cards = loadCards();
+      if (cards === null) {
+        cards = DEFAULT_CARDS.map(c => ({ ...c }));
+        saveCards();
+      }
+
+      function render() {
+        container.innerHTML = '';
+        if (cards.length === 0) {
+          container.innerHTML = '<div class="empty-state">目前沒有任何捷徑，點右上「＋ 新增按鍵」開始收集吧！</div>';
+          return;
+        }
+        
+        const html = cards.map((card, i) => `
+          <div class="hub-card" data-index="${i}">
+            <div class="card-header">${escapeHtml(card.name || '未命名')}</div>
+            <div class="card-body">
+              <input type="text" class="card-input" data-field="name" value="${escapeHtml(card.name || '')}" placeholder="顯示名稱" />
+              <input type="text" class="card-input" data-field="url" value="${escapeHtml(card.url || '')}" placeholder="https://example.com" />
+              <div class="card-actions">
+                <button type="button" class="action-btn btn-save" data-action="save">儲存</button>
+                <button type="button" class="action-btn btn-go" data-action="go">前往</button>
+                <button type="button" class="action-btn btn-del" data-action="del" title="刪除">✕</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        container.innerHTML = html;
+      }
+
+      container.addEventListener('click', e => {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const cardEl = btn.closest('.hub-card');
+        const index = Number(cardEl.dataset.index);
+        const action = btn.dataset.action;
+        const nameInput = cardEl.querySelector('[data-field="name"]');
+        const urlInput  = cardEl.querySelector('[data-field="url"]');
+        
+        if (action === 'save') {
+          const url = normalizeUrl(urlInput.value);
+          if (urlInput.value.trim() && !url) {
+            toast('網址格式不正確，請檢查後再儲存');
+            urlInput.focus();
+            return;
+          }
+          cards[index] = { name: nameInput.value.trim() || '未命名', url: url || urlInput.value.trim() };
+          saveCards();
+          render();
+          toast('已儲存');
+        }
+        if (action === 'go') {
+          const url = normalizeUrl(urlInput.value);
+          if (url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+          } else {
+            toast('請先填寫正確的網址！');
+            urlInput.focus();
+          }
+        }
+        if (action === 'del') {
+          if (confirm(`確定刪除「${cards[index].name || '未命名'}」嗎？`)) {
+            cards.splice(index, 1);
+            saveCards();
+            render();
+            toast('已刪除');
+          }
+        }
+      });
+
+      container.addEventListener('keydown', e => {
+        if (e.key !== 'Enter') return;
+        const input = e.target.closest('.card-input');
+        if (!input) return;
+        const cardEl = input.closest('.hub-card');
+        cardEl.querySelector('[data-action="save"]').click();
+      });
+
+      document.getElementById('addBtn').addEventListener('click', () => {
+        cards.push({ name: '', url: '' });
+        saveCards();
+        render();
+        const last = container.querySelector('.hub-card:last-child [data-field="name"]');
+        if (last) last.focus();
+      });
+
+      document.getElementById('exportBtn').addEventListener('click', () => {
+        const blob = new Blob([JSON.stringify(cards, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'hub-cards-backup.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        toast('已匯出備份');
+      });
+
+      document.getElementById('importBtn').addEventListener('click', () => {
+        document.getElementById('importFile').click();
+      });
+
+      document.getElementById('importFile').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result);
+            if (!Array.isArray(data)) throw new Error('not array');
+            cards = data
+              .filter(c => c && typeof c === 'object')
+              .map(c => ({ name: String(c.name || ''), url: String(c.url || '') }));
+            saveCards();
+            render();
+            toast(`已匯入 ${cards.length} 筆資料`);
+          } catch {
+            toast('匯入失敗：檔案格式不正確');
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
