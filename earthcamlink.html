@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>收集的網站</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      color: #e0e0e0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+    .home-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 28px;
+      padding: 10px 28px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .card-desc {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      color: #f0f0f0;
+    }
+    .card-domain {
+      font-size: 0.85rem;
+      color: #a0a0c0;
+      word-break: break-all;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: #8888aa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>收集的網站</h1>
+    <a class="home-btn" href="https://terry20250224.github.io/terrypages/multi-search.html">回主頁</a>
+    
+    <div class="grid">
+      <a class="card" href="https://www.earthcam.com/" target="_blank" rel="noopener">
+        <div class="card-desc">全球即時網路攝影機平台，提供世界各地即時影像、建築工地監控與縮時攝影</div>
+        <div class="card-domain">earthcam.com</div>
+      </a>
+    </div>
+    
+    <footer>資料來源：使用者提供的一般網址</footer>
+  </div>
+</body>
+</html>
